@@ -65,11 +65,13 @@
       <file leaf-file-name="CalculateTipActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/codepath/example/tipcalculator/app/CalculateTipActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.2209567" vertical-offset="334" max-vertical-offset="1860">
-              <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.5808656" vertical-offset="1065" max-vertical-offset="1905">
+              <caret line="100" column="36" selection-start-line="100" selection-start-column="36" selection-end-line="100" selection-end-column="36" />
               <folding>
-                <element signature="e#2182#2399#0" expanded="true" />
-                <element signature="e#2388#2389#0" expanded="true" />
+                <element signature="e#2128#2345#0" expanded="true" />
+                <element signature="e#2334#2335#0" expanded="true" />
+                <element signature="e#3210#3211#0" expanded="true" />
+                <element signature="e#3281#3282#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1190,8 +1192,10 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="1530">
           <caret line="39" column="85" selection-start-line="39" selection-start-column="85" selection-end-line="39" selection-end-column="88" />
           <folding>
-            <element signature="e#2182#2399#0" expanded="true" />
-            <element signature="e#2388#2389#0" expanded="true" />
+            <element signature="e#2128#2345#0" expanded="true" />
+            <element signature="e#2334#2335#0" expanded="true" />
+            <element signature="e#3210#3211#0" expanded="true" />
+            <element signature="e#3281#3282#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1222,11 +1226,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/codepath/example/tipcalculator/app/CalculateTipActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2209567" vertical-offset="334" max-vertical-offset="1860">
-          <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.5808656" vertical-offset="1065" max-vertical-offset="1905">
+          <caret line="100" column="36" selection-start-line="100" selection-start-column="36" selection-end-line="100" selection-end-column="36" />
           <folding>
-            <element signature="e#2182#2399#0" expanded="true" />
-            <element signature="e#2388#2389#0" expanded="true" />
+            <element signature="e#2128#2345#0" expanded="true" />
+            <element signature="e#2334#2335#0" expanded="true" />
+            <element signature="e#3210#3211#0" expanded="true" />
+            <element signature="e#3281#3282#0" expanded="true" />
           </folding>
         </state>
       </provider>

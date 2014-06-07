@@ -37,9 +37,6 @@ public class CalculateTipActivity extends ActionBarActivity {
         splitNumber.setMinValue(1);
         splitNumber.setMaxValue(10);
 
-
-//        tvFinalAmnt.setText(" ");
-
         setupSeekerListener();
         setupNumberPickerListener();
         setupBillAmountListener();
@@ -68,7 +65,7 @@ public class CalculateTipActivity extends ActionBarActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                
+
             }
         });
     }
@@ -90,9 +87,9 @@ public class CalculateTipActivity extends ActionBarActivity {
 
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 progressChanged = progress;
-                BigDecimal billAmount = new BigDecimal(txtBillAmnt.getText().toString());
-                BigDecimal tipAmount = new BigDecimal(String.valueOf(progressChanged*.01)).setScale(2, BigDecimal.ROUND_CEILING);
-                BigDecimal finalBill = billAmount.add(billAmount.multiply(tipAmount)).setScale(2, BigDecimal.ROUND_CEILING);;
+                BigDecimal billAmount = getBillAmount();
+                BigDecimal tipAmount = getTipAmount();
+                BigDecimal finalBill = getFinalBill();
                 tvTipPercent.setText(progressChanged + "% tip");
                 tvFinalAmnt.setText(finalBill.toString());
             }
@@ -107,12 +104,18 @@ public class CalculateTipActivity extends ActionBarActivity {
         });
     }
 
-    private void calculateTipAmount(int billAmnt) {
-
+    public BigDecimal getBillAmount() {
+        return new BigDecimal(txtBillAmnt.getText().toString());
     }
 
-    private void calculateTotalBill(int billAmnt) {
+    public BigDecimal getTipAmount() {
+        return new BigDecimal(String.valueOf(sbTipAmnt.getProgress()*.01)).setScale(2, BigDecimal.ROUND_CEILING);
+    }
 
+    public BigDecimal getFinalBill() {
+        BigDecimal billAmount = getBillAmount();
+        BigDecimal tipAmount = getTipAmount();
+        return billAmount.add(billAmount.multiply(tipAmount)).setScale(2, BigDecimal.ROUND_CEILING);
     }
 
     @Override

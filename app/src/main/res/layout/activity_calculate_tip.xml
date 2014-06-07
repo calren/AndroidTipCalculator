@@ -23,24 +23,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/sbTipAmnt"
-        android:layout_marginTop="138dp"
+        android:layout_marginTop="43dp"
+        android:max="50"
         android:layout_below="@+id/etBillTotal"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/etBillTotal"
-        android:layout_alignEnd="@+id/etBillTotal"
-        android:max="50"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Final Bill: "
-        android:id="@+id/textView"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="110dp" />
+        android:layout_alignEnd="@+id/etBillTotal" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -49,8 +38,18 @@
         android:text="% Tip"
         android:id="@+id/tvTipPercent"
         android:layout_below="@+id/sbTipAmnt"
-        android:layout_centerHorizontal="true"
-        android:phoneNumber="true" />
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Final Bill: "
+        android:id="@+id/textView"
+        android:layout_marginBottom="73dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -58,7 +57,14 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/txtFinalAmnt"
         android:layout_alignTop="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:password="false" />
+        android:layout_centerHorizontal="true"/>
+
+    <NumberPicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/numberPicker"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

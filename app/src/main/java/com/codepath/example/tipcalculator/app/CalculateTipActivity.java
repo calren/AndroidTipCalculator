@@ -107,7 +107,12 @@ public class CalculateTipActivity extends ActionBarActivity {
     }
 
     public BigDecimal getBillAmount() {
-        return new BigDecimal(txtBillAmnt.getText().toString());
+        String bill = txtBillAmnt.getText().toString();
+        if (!bill.isEmpty()) {
+            return new BigDecimal(txtBillAmnt.getText().toString());
+        } else {
+            return new BigDecimal("0");
+        }
     }
 
     public BigDecimal getTipAmount() {

@@ -77,7 +77,8 @@ public class CalculateTipActivity extends ActionBarActivity {
         splitNumber.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                System.out.println(newVal);
+                tvFinalAmnt.setText(getFinalBillPerPerson().toString());
+                tvToTalBill.setText(getFinalBill().toString());
             }
         });
 
@@ -106,6 +107,7 @@ public class CalculateTipActivity extends ActionBarActivity {
         });
     }
 
+    // add error handling for non numbers
     public BigDecimal getBillAmount() {
         String bill = txtBillAmnt.getText().toString();
         if (!bill.isEmpty()) {
@@ -123,13 +125,11 @@ public class CalculateTipActivity extends ActionBarActivity {
         return new BigDecimal(String.valueOf(splitNumber.getValue()));
     }
 
-
-
     public BigDecimal getFinalBillPerPerson() {
         BigDecimal billAmount = getBillAmount();
         BigDecimal tipAmount = getTipAmount();
-        return (billAmount.add(billAmount.multiply(tipAmount))
-                .setScale(2, BigDecimal.ROUND_CEILING)).divide(splitAmount());
+
+        return ((billAmount.add(billAmount.multiply(tipAmount))).divide(splitAmount(), BigDecimal.ROUND_HALF_UP)).setScale(2, BigDecimal.ROUND_CEILING);
     }
 
     public BigDecimal getFinalBill() {

@@ -20,6 +20,7 @@ public class CalculateTipActivity extends ActionBarActivity {
     EditText txtBillAmnt;
     SeekBar sbTipAmnt;
     TextView tvFinalAmnt;
+    TextView tvToTalBill;
     TextView tvTipPercent;
     NumberPicker splitNumber;
 
@@ -31,6 +32,7 @@ public class CalculateTipActivity extends ActionBarActivity {
         txtBillAmnt = (EditText) findViewById(R.id.etBillTotal);
         sbTipAmnt = (SeekBar) findViewById(R.id.sbTipAmnt);
         tvFinalAmnt = (TextView) findViewById(R.id.txtFinalAmnt);
+        tvToTalBill = (TextView) findViewById(R.id.totalBill);
         tvTipPercent = (TextView) findViewById(R.id.tvTipPercent);
         splitNumber = (NumberPicker) findViewById(R.id.numberPicker);
 
@@ -65,7 +67,8 @@ public class CalculateTipActivity extends ActionBarActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                tvFinalAmnt.setText(getFinalBillPerPerson().toString());
+                tvToTalBill.setText(getFinalBill().toString());
             }
         });
     }
@@ -87,11 +90,10 @@ public class CalculateTipActivity extends ActionBarActivity {
 
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 progressChanged = progress;
-                BigDecimal billAmount = getBillAmount();
-                BigDecimal tipAmount = getTipAmount();
                 BigDecimal finalBill = getFinalBill();
                 tvTipPercent.setText(progressChanged + "% tip");
-                tvFinalAmnt.setText(finalBill.toString());
+                tvFinalAmnt.setText(getFinalBillPerPerson().toString());
+                tvToTalBill.setText(getFinalBill().toString());
             }
 
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -112,10 +114,24 @@ public class CalculateTipActivity extends ActionBarActivity {
         return new BigDecimal(String.valueOf(sbTipAmnt.getProgress()*.01)).setScale(2, BigDecimal.ROUND_CEILING);
     }
 
+    public BigDecimal splitAmount() {
+        return new BigDecimal(String.valueOf(splitNumber.getValue()));
+    }
+
+
+
+    public BigDecimal getFinalBillPerPerson() {
+        BigDecimal billAmount = getBillAmount();
+        BigDecimal tipAmount = getTipAmount();
+        return (billAmount.add(billAmount.multiply(tipAmount))
+                .setScale(2, BigDecimal.ROUND_CEILING)).divide(splitAmount());
+    }
+
     public BigDecimal getFinalBill() {
         BigDecimal billAmount = getBillAmount();
         BigDecimal tipAmount = getTipAmount();
-        return billAmount.add(billAmount.multiply(tipAmount)).setScale(2, BigDecimal.ROUND_CEILING);
+        return (billAmount.add(billAmount.multiply(tipAmount))
+                .setScale(2, BigDecimal.ROUND_CEILING));
     }
 
     @Override

@@ -6,13 +6,16 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.math.BigDecimal;
+import java.util.LinkedList;
 
 
 public class CalculateTipActivity extends ActionBarActivity {
@@ -23,6 +26,21 @@ public class CalculateTipActivity extends ActionBarActivity {
     TextView tvToTalBill;
     TextView tvTipPercent;
     NumberPicker splitNumber;
+    ImageView p1;
+    ImageView p2;
+    ImageView p3;
+    ImageView p4;
+    ImageView p5;
+    ImageView p6;
+    ImageView p7;
+    ImageView p8;
+    ImageView p9;
+    ImageView p10;
+
+    ImageView[] images = new ImageView[10];
+    int lastImageSet = 0;
+
+    int progressChanged = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +53,38 @@ public class CalculateTipActivity extends ActionBarActivity {
         tvToTalBill = (TextView) findViewById(R.id.totalBill);
         tvTipPercent = (TextView) findViewById(R.id.tvTipPercent);
         splitNumber = (NumberPicker) findViewById(R.id.numberPicker);
+        p1 = (ImageView) findViewById(R.id.pic1);
+        p2 = (ImageView) findViewById(R.id.pic2);
+        p3 = (ImageView) findViewById(R.id.pic3);
+        p4 = (ImageView) findViewById(R.id.pic4);
+        p5 = (ImageView) findViewById(R.id.pic5);
+        p6 = (ImageView) findViewById(R.id.pic6);
+        p7 = (ImageView) findViewById(R.id.pic7);
+        p8 = (ImageView) findViewById(R.id.pic8);
+        p9 = (ImageView) findViewById(R.id.pic9);
+        p10 = (ImageView) findViewById(R.id.pic10);
+
+        p1.setVisibility(View.VISIBLE);
+        p2.setVisibility(View.INVISIBLE);
+        p3.setVisibility(View.INVISIBLE);
+        p4.setVisibility(View.INVISIBLE);
+        p5.setVisibility(View.INVISIBLE);
+        p6.setVisibility(View.INVISIBLE);
+        p7.setVisibility(View.INVISIBLE);
+        p8.setVisibility(View.INVISIBLE);
+        p9.setVisibility(View.INVISIBLE);
+        p10.setVisibility(View.INVISIBLE);
+
+        images[0] = p1;
+        images[1] = p2;
+        images[2] = p3;
+        images[3] = p4;
+        images[4] = p5;
+        images[5] = p6;
+        images[6] = p7;
+        images[7] = p8;
+        images[8] = p9;
+        images[9] = p10;
 
         splitNumber.setMinValue(1);
         splitNumber.setMaxValue(10);
@@ -69,6 +119,7 @@ public class CalculateTipActivity extends ActionBarActivity {
             public void afterTextChanged(Editable s) {
                 tvFinalAmnt.setText(getFinalBillPerPerson().toString());
                 tvToTalBill.setText(getFinalBill().toString());
+                tvTipPercent.setText(progressChanged + "% tip ($" + getTip() + ")");
             }
         });
     }
@@ -79,6 +130,7 @@ public class CalculateTipActivity extends ActionBarActivity {
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 tvFinalAmnt.setText(getFinalBillPerPerson().toString());
                 tvToTalBill.setText(getFinalBill().toString());
+                setAndroidIcons(newVal, oldVal);
             }
         });
 
@@ -86,13 +138,12 @@ public class CalculateTipActivity extends ActionBarActivity {
 
     private void setupSeekerListener() {
         sbTipAmnt.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int progressChanged = 0;
             int billAmount = 0;
 
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 progressChanged = progress;
                 BigDecimal finalBill = getFinalBill();
-                tvTipPercent.setText(progressChanged + "% tip");
+                tvTipPercent.setText(progressChanged + "% tip ($" + getTip() + ")");
                 tvFinalAmnt.setText(getFinalBillPerPerson().toString());
                 tvToTalBill.setText(getFinalBill().toString());
             }
@@ -105,6 +156,20 @@ public class CalculateTipActivity extends ActionBarActivity {
 
             }
         });
+    }
+
+    public void setAndroidIcons(int newNumPickerVal, int oldNumPickerVal) {
+        if (newNumPickerVal > oldNumPickerVal) {
+            lastImageSet++;
+            images[lastImageSet].setVisibility(View.VISIBLE);
+        } else {
+            images[lastImageSet].setVisibility(View.INVISIBLE);
+            lastImageSet--;
+        }
+    }
+
+    public String getTip() {
+        return (getBillAmount().multiply(getTipAmount()).setScale(2, BigDecimal.ROUND_CEILING)).toString();
     }
 
     // add error handling for non numbers

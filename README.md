@@ -18,4 +18,4 @@ Completed user stories:
 
 Video Walkthrough:
 
- (TipCalculator3.gif)
+![Video Walkthrough](TipCalculator3.gif)

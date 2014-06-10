@@ -1,5 +1,6 @@
 package com.codepath.example.tipcalculator.app;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -7,15 +8,15 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.math.BigDecimal;
-import java.util.LinkedList;
 
 
 public class CalculateTipActivity extends ActionBarActivity {
@@ -89,6 +90,10 @@ public class CalculateTipActivity extends ActionBarActivity {
         splitNumber.setMinValue(1);
         splitNumber.setMaxValue(10);
 
+        InputMethodManager imm =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(txtBillAmnt, InputMethodManager.SHOW_IMPLICIT);
+        txtBillAmnt.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
         setupSeekerListener();
         setupNumberPickerListener();
         setupBillAmountListener();
@@ -105,6 +110,7 @@ public class CalculateTipActivity extends ActionBarActivity {
 
     private void setupBillAmountListener() {
         txtBillAmnt.addTextChangedListener(new TextWatcher() {
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
